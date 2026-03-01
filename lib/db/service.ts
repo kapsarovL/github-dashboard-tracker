@@ -47,7 +47,7 @@ export async function unsaveRepository(full_name: string) {
   } catch (error) {
     // Already deleted or doesn't exist, or other error.
     // Log the error for debugging, but return null as per original intent.
-    console.error(`Error unsaving repository ${full_name}:`, error);
+    console.error("Error unsaving repository %s:", full_name, error);
     return null;
   }
 }
