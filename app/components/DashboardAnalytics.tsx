@@ -16,12 +16,6 @@ import {
   ArrowDownRight,
 } from "lucide-react";
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/app/ui/Primitives/ui/Card";
-import {
   StaggerContainer,
   StaggerItem,
 } from "@/app/components/MotionWrappers";

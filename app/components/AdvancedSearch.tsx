@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import {
   Search,
   Filter,
@@ -429,7 +429,7 @@ export function AdvancedSearch({ onSearchComplete }: AdvancedSearchProps) {
                       No repositories found
                     </h3>
                     <p className="text-muted-foreground mt-2 text-sm font-medium">
-                      Try adjusting your search query or filters to find what you're looking for.
+                      Try adjusting your search query or filters to find what you&apos;re looking for.
                     </p>
                   </div>
                 </StaggerItem>

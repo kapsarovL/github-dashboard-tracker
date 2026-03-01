@@ -9,7 +9,6 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  ReferenceLine,
 } from "recharts";
 import { Button } from "@/app/ui/Primitives/ui/Button";
 import {
@@ -108,7 +107,6 @@ export function ActivityChart({ data }: ActivityChartProps) {
   // Refined colors from design system
   const strokeColor = mode === "commits" ? "#2563eb" : "#16a34a"; // primary (blue-600) / success (green-600)
   const gradientId = `gradient-${mode}-${uniqueId}`;
-  const glowId = `glow-${mode}-${uniqueId}`;
 
   if (!data || data.length === 0) {
     return (
@@ -136,7 +134,6 @@ export function ActivityChart({ data }: ActivityChartProps) {
   const maxValue = Math.max(
     ...data.map((d) => (mode === "commits" ? d.commits : d.issues)),
   );
-  const avgValue = Math.round(currentData / data.length);
 
   // Find best and worst days
   const bestDay = data.reduce((max, d) =>

@@ -1,13 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   GitCompare,
   Star,
   GitFork,
   AlertCircle,
   Users,
-  Code2,
   TrendingUp,
   Plus,
   Trash2,

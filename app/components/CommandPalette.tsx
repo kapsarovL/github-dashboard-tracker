@@ -13,7 +13,6 @@ import {
   LayoutDashboard,
   Moon,
   Sun,
-  Monitor,
   X,
   Command,
   ArrowRight,
@@ -262,7 +261,7 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
               <div className="bg-muted mb-4 flex h-12 w-12 items-center justify-center rounded-full">
                 <Command className="h-6 w-6 opacity-30" />
               </div>
-              <p className="text-sm font-medium">No commands found for "{searchQuery}"</p>
+              <p className="text-sm font-medium">No commands found for &quot;{searchQuery}&quot;</p>
             </div>
           )}
         </div>

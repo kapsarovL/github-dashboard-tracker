@@ -125,6 +125,18 @@ github-dashboard/
 
 ---
 
+## 🧪 Testing
+
+| Command | Description |
+|---------|-------------|
+| `npm test` | Run all tests |
+| `npm run test:watch` | Watch mode |
+| `npm run test:coverage` | Coverage report |
+
+**44 tests passing across 6 suites** — components, integration, and hooks.
+
+---
+
 ## ✨ Features
 
 - **Repository Dashboard** - View stats, issues, commits, and pull requests

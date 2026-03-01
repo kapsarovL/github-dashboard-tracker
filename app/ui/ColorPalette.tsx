@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./Primitives/ui/Card";
+import { Card, CardContent } from "./Primitives/ui/Card";
 import { Button } from "./Primitives/ui/Button";
 
 /**

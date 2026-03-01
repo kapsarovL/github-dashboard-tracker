@@ -25,7 +25,6 @@ import {
   Save,
   Moon,
   Sun,
-  Monitor,
   GitBranch,
   Mail,
   Shield,
