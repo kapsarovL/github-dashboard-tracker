@@ -14,7 +14,7 @@ A comprehensive dashboard for monitoring and analyzing GitHub repository activit
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/kapsarovL/github-dashboard-tracker
    cd github-dashboard
    ```
 

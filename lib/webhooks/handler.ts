@@ -47,7 +47,7 @@ export class WebhookHandler {
   }
 
   static async handleEvent({ event, payload }: GitHubWebhookEvent) {
-    console.log(`[WebhookHandler] Received event: ${event}`);
+    console.log("[WebhookHandler] Received event: %s", event);
 
     switch (event) {
       case "repository":
@@ -60,7 +60,7 @@ export class WebhookHandler {
         await this.handleIssueEvent(payload);
         break;
       default:
-        console.log(`[WebhookHandler] Unhandled event type: ${event}`);
+        console.log("[WebhookHandler] Unhandled event type: %s", event);
     }
   }
 
@@ -68,7 +68,9 @@ export class WebhookHandler {
     const action = payload.action;
     const repoFullName = payload.repository?.full_name;
     console.log(
-      `[WebhookHandler] Repository event - Action: ${action}, Repo: ${repoFullName}`,
+      "[WebhookHandler] Repository event - Action: %s, Repo: %s",
+      action,
+      repoFullName,
     );
 
     if (repoFullName) {
@@ -80,7 +82,9 @@ export class WebhookHandler {
     const repoFullName = payload.repository?.full_name;
     const pusher = payload.pusher?.name;
     console.log(
-      `[WebhookHandler] Push event - Repo: ${repoFullName}, Pusher: ${pusher}`,
+      "[WebhookHandler] Push event - Repo: %s, Pusher: %s",
+      repoFullName,
+      pusher,
     );
 
     if (repoFullName) {
@@ -93,10 +97,14 @@ export class WebhookHandler {
     const issueTitle = payload.issue?.title;
     const repoFullName = payload.repository?.full_name;
     console.log(
-      `[WebhookHandler] Issue event - Action: ${action}, Title: ${issueTitle}`,
+      "[WebhookHandler] Issue event - Action: %s, Title: %s",
+      action,
+      issueTitle,
     );
     console.log(
-      `[WebhookHandler] Issue event - Action: ${action}, Repo: ${repoFullName}`,
+      "[WebhookHandler] Issue event - Action: %s, Repo: %s",
+      action,
+      repoFullName,
     );
 
     if (repoFullName) {
@@ -110,7 +118,7 @@ export class WebhookHandler {
       if (owner && repo) {
         const statsCacheKey = `github:stats:${owner}:${repo}`;
         const metadataCacheKey = `github:metadata:${owner}:${repo}`;
-        console.log(`[WebhookHandler] Clearing cache for ${repoFullName}`);
+        console.log("[WebhookHandler] Clearing cache for %s", repoFullName);
         await Promise.all([
           delCache(statsCacheKey),
           delCache(metadataCacheKey),
@@ -119,7 +127,8 @@ export class WebhookHandler {
       }
     } catch (error) {
       console.error(
-        `[WebhookHandler] Cache invalidation failed for ${repoFullName}:`,
+        "[WebhookHandler] Cache invalidation failed for %s:",
+        repoFullName,
         error,
       );
       throw error;
