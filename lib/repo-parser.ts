@@ -12,22 +12,20 @@ export function parseRepoString(
   const trimmed = input.trim();
   if (!trimmed) return null;
 
-  // Handle full URLs
+  // Handle full URLs — always attempt URL parsing and validate hostname exactly
   try {
-    if (trimmed.startsWith("http") || trimmed.includes("github.com")) {
-      const urlString = trimmed.startsWith("http")
-        ? trimmed
-        : `https://${trimmed}`;
-      const url = new URL(urlString);
-      if (url.hostname === "github.com") {
-        const pathParts = url.pathname.split("/").filter(Boolean);
-        if (pathParts.length >= 2) {
-          return { owner: pathParts[0], repo: pathParts[1] };
-        }
+    const urlString = trimmed.startsWith("http")
+      ? trimmed
+      : `https://${trimmed}`;
+    const url = new URL(urlString);
+    if (url.hostname === "github.com") {
+      const pathParts = url.pathname.split("/").filter(Boolean);
+      if (pathParts.length >= 2) {
+        return { owner: pathParts[0], repo: pathParts[1] };
       }
     }
   } catch {
-    // Fallback to regex if URL parsing fails
+    // Not a valid URL, fall through to string parsing
   }
 
   // Handle owner/repo or owner repo
