@@ -1,0 +1,11 @@
+generator test_client {
+  provider = "prisma-client-js"
+}
+
+datasource test_db {
+  provider = "postgresql"
+}
+
+model TestRepo {
+  id Int @id @default(autoincrement())
+}

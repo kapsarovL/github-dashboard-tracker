@@ -1,0 +1,334 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────────
+   Tailwind v4 theme bridge — utilities reference runtime CSS vars
+   ───────────────────────────────────────────────────────────────── */
+@theme inline {
+  /* Core semantic tokens */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Extended semantic tokens */
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+
+  /* Neutral scale — for fine-grained UI control */
+  --color-neutral-50: var(--neutral-50);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-900: var(--neutral-900);
+  --color-neutral-950: var(--neutral-950);
+
+  /* Radius scale */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  /* Typography */
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), "Menlo", "Monaco", monospace;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Theme tokens — Professional Office Design System
+   All in @layer base so class selectors override
+   ───────────────────────────────────────────────────────────────── */
+@layer base {
+  /* ═══════════════════════════════════════════════════════════════
+     LIGHT MODE — Professional Office Aesthetic
+     Clean, minimal cards with subtle borders and shadows
+     Optimized for clarity and extended work sessions
+     ═══════════════════════════════════════════════════════════════ */
+  :root {
+    /* Neutral Scale — Professional Zinc for clean appearance */
+    --neutral-50: #fafafa;
+    --neutral-100: #f4f4f5;
+    --neutral-200: #e4e4e7;
+    --neutral-300: #d4d4d8;
+    --neutral-400: #a1a1aa;
+    --neutral-500: #71717a;
+    --neutral-600: #52525b;
+    --neutral-700: #3f3f46;
+    --neutral-800: #27272a;
+    --neutral-900: #18181b;
+    --neutral-950: #09090b;
+
+    /* Core UI Tokens — Light and airy */
+    --background: #fafafa; /* neutral-50 — clean canvas */
+    --foreground: #09090b; /* neutral-950 — high contrast text */
+    --card: #ffffff; /* pure white — clean cards */
+    --card-foreground: #09090b; /* neutral-950 */
+    --popover: #ffffff;
+    --popover-foreground: #09090b;
+
+    /* Primary — Professional Blue (trustworthy, high contrast) */
+    --primary: #2563eb; /* blue-600 — WCAG AAA on white */
+    --primary-foreground: #ffffff;
+    --primary-hover: #1d4ed8; /* blue-700 */
+    --primary-active: #1e40af; /* blue-800 */
+
+    /* Secondary — Light gray for supporting actions */
+    --secondary: #f4f4f5; /* neutral-100 */
+    --secondary-foreground: #27272a; /* neutral-800 */
+    --secondary-hover: #e4e4e7; /* neutral-200 */
+
+    /* Muted — For de-emphasized content */
+    --muted: #f4f4f5; /* neutral-100 — distinct from background */
+    --muted-foreground: #71717a; /* neutral-500 — medium gray */
+
+    /* Accent — Subtle blue highlight */
+    --accent: #eff6ff; /* blue-50 — very light blue */
+    --accent-foreground: #1e40af; /* blue-800 */
+    --accent-hover: #dbeafe; /* blue-100 */
+
+    /* Semantic Colors — Professional tones */
+    --destructive: #dc2626; /* red-600 */
+    --destructive-foreground: #ffffff;
+    --destructive-hover: #b91c1c; /* red-700 */
+
+    --success: #16a34a; /* green-600 */
+    --success-foreground: #ffffff;
+    --success-bg: #f0fdf4; /* green-50 */
+
+    --warning: #d97706; /* amber-600 */
+    --warning-foreground: #ffffff;
+    --warning-bg: #fffbeb; /* amber-50 */
+
+    --info: #0284c7; /* sky-600 */
+    --info-foreground: #ffffff;
+    --info-bg: #f0f9ff; /* sky-50 */
+
+    /* Brand — Professional corporate blue */
+    --brand: #2563eb; /* blue-600 */
+    --brand-foreground: #ffffff;
+
+    /* Functional Tokens — No borders for light mode (shadow-based depth) */
+    --border: transparent;
+    --input: #e4e4e7;
+    --input-bg: #ffffff;
+    --ring: #2563eb; /* blue-600 */
+
+    /* Elevation — Very subtle shadows for light mode */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+    --shadow-md:
+      0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+    --shadow-lg:
+      0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+    --shadow-xl:
+      0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.04);
+
+    /* Spacing & Sizing */
+    --radius: 0.5rem; /* 8px — professional standard */
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     DARK MODE — .dark class (forced)
+     Reduced contrast for eye comfort, maintaining readability
+     ═══════════════════════════════════════════════════════════════ */
+  .dark {
+    /* Neutral Scale — Adjusted for dark mode */
+    --neutral-50: #09090b;
+    --neutral-100: #18181b;
+    --neutral-200: #27272a;
+    --neutral-300: #3f3f46;
+    --neutral-400: #52525b;
+    --neutral-500: #71717a;
+    --neutral-600: #a1a1aa;
+    --neutral-700: #d4d4d8;
+    --neutral-800: #e4e4e7;
+    --neutral-900: #f4f4f5;
+    --neutral-950: #fafafa;
+
+    /* Core UI Tokens */
+    --background: #09090b; /* neutral-950 — deep base */
+    --foreground: #fafafa; /* neutral-50 — high contrast */
+    --card: #18181b; /* neutral-900 — elevated surface */
+    --card-foreground: #fafafa;
+    --popover: #18181b;
+    --popover-foreground: #fafafa;
+
+    /* Primary — Brighter blue for dark backgrounds */
+    --primary: #3b82f6; /* blue-500 — WCAG AA on dark */
+    --primary-foreground: #ffffff;
+    --primary-hover: #60a5fa; /* blue-400 */
+    --primary-active: #93c5fd; /* blue-300 */
+
+    /* Secondary */
+    --secondary: #3f3f46; /* neutral-700 — distinct from card/muted */
+    --secondary-foreground: #fafafa;
+    --secondary-hover: #52525b; /* neutral-600 */
+
+    /* Muted */
+    --muted: #27272a; /* neutral-800 */
+    --muted-foreground: #a1a1aa; /* neutral-400 — WCAG AA */
+
+    /* Accent */
+    --accent: #1e3a5f; /* dark blue — subtle */
+    --accent-foreground: #93c5fd; /* blue-300 */
+    --accent-hover: #2563eb; /* blue-600 */
+
+    /* Semantic Colors — Adjusted for dark mode */
+    --destructive: #ef4444; /* red-500 */
+    --destructive-foreground: #ffffff;
+    --destructive-hover: #f87171; /* red-400 */
+
+    --success: #22c55e; /* green-500 */
+    --success-foreground: #ffffff;
+    --success-bg: #14532d; /* green-950 */
+
+    --warning: #f59e0b; /* amber-500 */
+    --warning-foreground: #ffffff;
+    --warning-bg: #451a03; /* amber-950 */
+
+    --info: #0ea5e9; /* sky-500 */
+    --info-foreground: #ffffff;
+    --info-bg: #0c4a6e; /* sky-950 */
+
+    /* Brand */
+    --brand: #3b82f6; /* blue-500 */
+    --brand-foreground: #ffffff;
+
+    /* Functional Tokens */
+    --border: #27272a; /* neutral-800 — subtle separation */
+    --input: #3f3f46; /* neutral-700 */
+    --input-bg: #18181b;
+    --ring: #3b82f6; /* blue-500 */
+
+    /* Elevation & Effects — Softer shadows in dark mode */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+    --shadow-md:
+      0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+    --shadow-lg:
+      0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+  }
+
+  /* ── Base element styles ──────────────────────────────────────── */
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-primary) 12%, transparent);
+    color: var(--color-foreground);
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--neutral-300);
+    border-radius: 99px;
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background-color: var(--neutral-700);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-muted-foreground);
+  }
+
+  /* Solid card — no blur, no transparency. */
+  .bg-card {
+    background-color: var(--color-card);
+    border-style: solid;
+    border-color: var(--color-border);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   GLOBAL OVERRIDES — Forced Borderless Light Mode
+   Ensures absolutely no borders in light mode regardless of utility usage
+   ───────────────────────────────────────────────────────────────── */
+:root:not(.dark) .border-border,
+:root:not(.dark) .border,
+:root:not(.dark) .border-t,
+:root:not(.dark) .border-b,
+:root:not(.dark) .border-l,
+:root:not(.dark) .border-r,
+:root:not(.dark) .border-x,
+:root:not(.dark) .border-y,
+:root:not(.dark) .border-input,
+:root:not(.dark) .bg-card,
+:root:not(.dark) .card,
+:root:not(.dark) .button,
+:root:not(.dark) .input,
+:root:not(.dark) [class*="border-"],
+:root:not(.dark) div,
+:root:not(.dark) section,
+:root:not(.dark) article,
+:root:not(.dark) nav,
+:root:not(.dark) aside,
+:root:not(.dark) header,
+:root:not(.dark) footer,
+:root:not(.dark) main,
+:root:not(.dark) input,
+:root:not(.dark) textarea,
+:root:not(.dark) select,
+:root:not(.dark) button {
+  border-width: 0px !important;
+  border-style: none !important;
+}
+
+/* Re-enable borders in dark mode with explicit priority */
+.dark .border-border,
+.dark .border,
+.dark .border-t,
+.dark .border-b,
+.dark .border-l,
+.dark .border-r,
+.dark .border-x,
+.dark .border-y,
+.dark .border-input,
+.dark .bg-card,
+.dark .card,
+.dark [class*="border-"] {
+  border-width: 1px !important;
+  border-style: solid !important;
+}

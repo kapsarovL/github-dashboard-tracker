@@ -1,0 +1,120 @@
+/**
+ * Theme CSS — Professional Office Design System
+ *
+ * This file is intentionally minimal. All color tokens and theme variables
+ * are defined in app/globals.css to ensure consistent loading order.
+ *
+ * For color system documentation, see:
+ * @see ./COLOR_SYSTEM.md
+ *
+ * Usage:
+ * - Import this file after globals.css if additional theme styles are needed
+ * - All color tokens are available via CSS custom properties
+ * - Use semantic tokens (--primary, --success, etc.) instead of hardcoded values
+ */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Color Token Reference
+   ═══════════════════════════════════════════════════════════════════════════
+
+   Core Tokens (defined in globals.css):
+   ─────────────────────────────────────────
+   var(--background)           Page/app background
+   var(--foreground)           Primary text color
+   var(--card)                 Card/panel background
+   var(--card-foreground)      Card text color
+   var(--popover)              Popover/modal background
+   var(--popover-foreground)   Popover text color
+
+   Interactive:
+   ─────────────────────────────────────────
+   var(--primary)              Primary action color
+   var(--primary-foreground)   Text on primary
+   var(--primary-hover)        Primary hover state
+   var(--primary-active)       Primary active state
+   var(--secondary)            Secondary action color
+   var(--secondary-foreground) Text on secondary
+   var(--secondary-hover)      Secondary hover state
+   var(--accent)               Accent/highlight color
+   var(--accent-foreground)    Text on accent
+   var(--accent-hover)         Accent hover state
+
+   Semantic:
+   ─────────────────────────────────────────
+   var(--success)              Success state color
+   var(--success-foreground)   Text on success
+   var(--success-bg)           Success background
+   var(--warning)              Warning state color
+   var(--warning-foreground)   Text on warning
+   var(--warning-bg)           Warning background
+   var(--info)                 Info state color
+   var(--info-foreground)      Text on info
+   var(--info-bg)              Info background
+   var(--destructive)          Destructive/error color
+   var(--destructive-foreground) Text on destructive
+   var(--destructive-hover)    Destructive hover state
+
+   Functional:
+   ─────────────────────────────────────────
+   var(--border)               Default border color
+   var(--input)                Input border color
+   var(--input-bg)             Input background color
+   var(--ring)                 Focus ring color
+   var(--muted)                Muted background
+   var(--muted-foreground)     Muted text color
+
+   Neutral Scale:
+   ─────────────────────────────────────────
+   var(--neutral-50) through var(--neutral-950)
+   Use for fine-grained control when semantic tokens don't apply
+
+   Effects:
+   ─────────────────────────────────────────
+   var(--shadow-sm)            Small shadow
+   var(--shadow-md)            Medium shadow
+   var(--shadow-lg)            Large shadow
+   var(--radius)               Default border radius
+   var(--radius-sm)            Small radius (radius - 4px)
+   var(--radius-md)            Medium radius (radius - 2px)
+   var(--radius-lg)            Large radius (same as radius)
+   var(--radius-xl)            Extra large radius (radius + 4px)
+   var(--radius-2xl)           2XL radius (radius + 8px)
+
+   ═══════════════════════════════════════════════════════════════════════════
+   Example Usage
+   ═══════════════════════════════════════════════════════════════════════════
+
+   CSS:
+   ─────────────────────────────────────────
+   .button {
+     background-color: var(--primary);
+     color: var(--primary-foreground);
+     border: 1px solid transparent;
+   }
+
+   .button:hover {
+     background-color: var(--primary-hover);
+   }
+
+   .card {
+     background-color: var(--card);
+     border: 1px solid var(--border);
+     box-shadow: var(--shadow-md);
+     border-radius: var(--radius-lg);
+   }
+
+   .alert-success {
+     background-color: var(--success-bg);
+     color: var(--success);
+     border: 1px solid var(--success);
+   }
+
+   Tailwind (with CSS variable support):
+   ─────────────────────────────────────────
+   <button className="bg-[var(--primary)] text-[var(--primary-foreground)] hover:bg-[var(--primary-hover)]">
+   <div className="bg-card border-border shadow-md rounded-lg">
+
+   ═══════════════════════════════════════════════════════════════════════════
+ */
+
+/* No additional styles needed — all tokens defined in globals.css */
