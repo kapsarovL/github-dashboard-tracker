@@ -36,7 +36,7 @@ export async function getCache<T>(key: string): Promise<T | null> {
   try {
     return localCache.get<T>(key);
   } catch (error) {
-    console.error(`Cache Get Error for key ${key}:`, error);
+    console.error("Cache Get Error for key %s:", key, error);
     return null;
   }
 }
@@ -52,7 +52,7 @@ export async function setCache<T>(
   try {
     localCache.set(key, value, ttlSeconds);
   } catch (error) {
-    console.error(`Cache Set Error for key ${key}:`, error);
+    console.error("Cache Set Error for key %s:", key, error);
   }
 }
 
@@ -63,6 +63,6 @@ export async function delCache(key: string): Promise<void> {
   try {
     localCache.delete(key);
   } catch (error) {
-    console.error(`Cache Del Error for key ${key}:`, error);
+    console.error("Cache Del Error for key %s:", key, error);
   }
 }
