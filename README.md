@@ -1,249 +1,142 @@
-# GitHub Workspace Tracker
+# GitHub Dashboard Tracker
 
-Real-time dashboard for monitoring repository health, contributor activity, and project velocity across multiple GitHub repositories.
+> Real-time repository intelligence for developers who measure, not guess.
 
-**Built to solve:** Developers managing 5+ repositories waste 15+ minutes daily context-switching between GitHub's native Insights, Issues, PRs, and commit history. This centralizes critical metrics in a single view.
+![GitHub Dashboard](./public/dashboard-preview.png)
+
+**[Live Demo →](https://github-dashboard-beige.vercel.app)**
 
 ---
 
-## Why This Exists
+## The Problem
 
-GitHub's native analytics are scattered across multiple tabs and don't support:
-- Cross-repository comparison
-- Historical trend analysis beyond 30 days
-- Custom metrics and reporting
-- Exportable reports for stakeholders
+GitHub's native analytics are scattered across 4+ tabs and reset after 30 days.
 
-**This dashboard aggregates:**
-- Commit velocity trends (daily/weekly/monthly)
-- Contributor activity patterns
-- Issue/PR lifecycle metrics
-- Repository health indicators
-- Exportable PDF reports
+Developers managing multiple repositories waste 15+ minutes daily switching between Insights, Issues, PRs, and commit history — with no way to compare repositories side by side or export data for stakeholders.
+
+This dashboard centralises everything into a single, fast interface.
+
+---
+
+## What It Does
+
+| Feature | Detail |
+|---|---|
+| **Repository Analysis** | Commits, contributors, PRs, issues — one view |
+| **Cross-repo Comparison** | Side-by-side metrics across multiple repositories |
+| **Activity Tracking** | Commit velocity trends beyond GitHub's 30-day limit |
+| **PDF / CSV / JSON Export** | Stakeholder-ready reports in one click |
+| **Real-time Sync** | GitHub webhook integration + manual refresh |
+| **Saved Repositories** | Bookmark repos for instant access |
 
 ---
 
 ## Technical Highlights
 
-### Production-Grade Architecture
-- **Next.js 16 App Router** with server components for optimal performance
-- **PostgreSQL + Prisma ORM** with optimized indexing for sub-100ms queries
-- **NextAuth.js v5** OAuth flow with GitHub integration
-- **Type-safe API routes** with Zod validation
-- **44 passing tests** across components, integration, and hooks
+**Architecture decisions worth noting:**
 
-### Performance Optimization
-- In-memory caching with TTL for GitHub API responses
-- Incremental data updates (not full repository scans)
-- Rate limit handling with exponential backoff
-- Server-side rendering for instant page loads
-
-### Real-Time Data Sync
-- GitHub webhook integration for live updates
-- Manual refresh capability for on-demand sync
-- Octokit API client with retry logic
-- Background job processing for heavy operations
+- **Next.js 16 App Router** — server components for optimal Time to First Byte
+- **PostgreSQL + Prisma** — optimised indexing for sub-100ms query response
+- **In-memory cache with TTL** — reduces GitHub API calls, handles rate limits gracefully
+- **Exponential backoff** — retry logic on all Octokit API calls
+- **Zod validation** — type-safe API routes end to end
+- **NextAuth.js v5** — GitHub OAuth with secure session handling
+- **44 tests passing** — components, integration, hooks, auth flows
 
 ---
 
-## Key Features
+## Stack
 
-- **📊 Repository Dashboard** - Comprehensive stats, issues, commits, and PRs
-- **⭐ Save Repositories** - Bookmark repos for quick access
-- **📝 Issue Creation** - Create GitHub issues directly from dashboard
-- **📄 PDF Reports** - Generate professional repository analysis reports
-- **👤 User Dashboard** - Manage saved repositories at `/dashboard`
-- **🔄 Real-time Sync** - Manual refresh + webhook support
-- **🌙 Dark Mode** - Full dark/light theme support
-
----
-
-## Tech Stack
-
-**Frontend:** Next.js 16.1.6, React, TypeScript, Tailwind CSS v4  
-**UI Components:** shadcn/ui, Radix UI, Recharts  
-**Backend:** Next.js API Routes, Prisma ORM, PostgreSQL (Neon)  
-**Auth:** NextAuth.js v5 (GitHub OAuth)  
-**API:** Octokit (GitHub REST API v3)  
-**Testing:** Jest, React Testing Library (44 tests, 6 suites)  
-**PDF Generation:** jsPDF
+```
+Frontend:  Next.js 16 · React · TypeScript · Tailwind CSS v4
+UI:        shadcn/ui · Radix UI · Recharts
+Backend:   Next.js API Routes · Prisma ORM · PostgreSQL (Neon)
+Auth:      NextAuth.js v5 (GitHub OAuth)
+API:       Octokit (GitHub REST API v3)
+Testing:   Jest · React Testing Library (44 tests, 6 suites)
+Export:    jsPDF
+Deploy:    Vercel
+```
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
-### Prerequisites
-
-- Node.js 18.x or higher
-- npm 9.x or higher
-- PostgreSQL (Neon recommended for serverless)
-
-### Installation
-
-1. **Clone and install**
 ```bash
-   git clone https://github.com/kapsarovL/github-dashboard-tracker
-   cd github-dashboard
-   npm install
+git clone https://github.com/kapsarovL/github-dashboard-tracker
+cd github-dashboard-tracker
+npm install
+cp .env.local.example .env.local
 ```
 
-2. **Configure environment**
+Required environment variables:
+
 ```bash
-   cp .env.local.example .env.local
+DATABASE_URL=           # Neon PostgreSQL connection string
+AUTH_GITHUB_ID=         # GitHub OAuth Client ID
+AUTH_GITHUB_SECRET=     # GitHub OAuth Client Secret
+AUTH_SECRET=            # openssl rand -base64 32
+GITHUB_TOKEN=           # GitHub Personal Access Token
+GITHUB_WEBHOOK_SECRET=  # Webhook secret (optional)
 ```
 
-   Required environment variables:
-```env
-   DATABASE_URL=              # Neon PostgreSQL connection string
-   AUTH_GITHUB_ID=            # GitHub OAuth Client ID
-   AUTH_GITHUB_SECRET=        # GitHub OAuth Client Secret
-   AUTH_SECRET=               # Generate: openssl rand -base64 32
-   GITHUB_TOKEN=              # GitHub Personal Access Token
-   GITHUB_WEBHOOK_SECRET=     # Webhook secret (optional)
-```
-
-3. **Initialize database**
 ```bash
-   npm run db:push
-   npm run db:generate
+npm run db:push
+npm run db:generate
+npm run dev
 ```
 
-4. **Start development server**
+---
+
+## Testing
+
 ```bash
-   npm run dev
+npm test                 # Run all 44 tests
+npm run test:coverage    # Coverage report
 ```
 
-   Open [http://localhost:3000](http://localhost:3000)
-
----
-
-## 📁 Project Structure
-```
-github-dashboard/
-├── app/
-│   ├── api/              # API routes (auth, repos, webhooks)
-│   ├── actions/          # Server actions for data mutations
-│   ├── components/       # React components
-│   ├── dashboard/        # Dashboard pages
-│   ├── hooks/            # Custom React hooks
-│   ├── providers/        # Context providers
-│   └── ui/               # shadcn/ui components
-├── lib/
-│   ├── cache/            # In-memory cache with TTL
-│   ├── db/               # Prisma client & services
-│   ├── webhooks/         # GitHub webhook handlers
-│   ├── github.ts         # Octokit API client
-│   └── pdf.ts            # PDF report generation
-├── prisma/
-│   └── schema.prisma     # Database schema
-└── types/                # TypeScript definitions
-```
-
----
-
-## 🔧 Configuration Details
-
-### GitHub OAuth Setup
-
-1. Go to [GitHub Developer Settings](https://github.com/settings/developers)
-2. Create new OAuth App
-3. Set callback URL: `http://localhost:3000/api/auth/callback/github`
-4. Copy Client ID and Secret to `.env.local`
-
-### Database Setup (Neon)
-
-1. Create account at [Neon](https://neon.tech)
-2. Create new project
-3. Copy connection string to `DATABASE_URL` in `.env.local`
-
-### GitHub Webhooks (Optional - for real-time updates)
-
-1. Repository **Settings** → **Webhooks** → **Add webhook**
-2. Payload URL: `https://your-domain.com/api/webhooks/github`
-3. Content type: `application/json`
-4. Secret: Your `GITHUB_WEBHOOK_SECRET`
-5. Events: `Pushes`, `Issues`, `Pull requests`
-
----
-
-## 📋 Available Scripts
-
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
-| `npm run start` | Start production server |
-| `npm run lint` | Run ESLint |
-| `npm test` | Run test suite |
-| `npm run test:watch` | Run tests in watch mode |
-| `npm run test:coverage` | Generate coverage report |
-| `npm run db:generate` | Generate Prisma Client |
-| `npm run db:push` | Push schema to database |
-| `npm run db:migrate` | Create and apply migration |
-| `npm run db:studio` | Open Prisma Studio |
-
----
-
-## 🧪 Testing
-
-**Test Coverage:** 44 tests passing across 6 suites
-
-- Component tests (React Testing Library)
-- Integration tests (API routes)
-- Hook tests (custom React hooks)
-- Database operations
+**Coverage includes:**
+- Component rendering (React Testing Library)
+- API route integration
+- Custom React hooks
 - Authentication flows
-```bash
-npm test              # Run all tests
-npm run test:watch    # Watch mode
-npm run test:coverage # Coverage report
+- Database operations
+
+---
+
+## Project Structure
+
+```
+├── app/
+│   ├── api/          # Auth, repos, webhooks
+│   ├── actions/      # Server actions
+│   ├── dashboard/    # Dashboard pages
+│   └── hooks/        # Custom React hooks
+├── lib/
+│   ├── cache/        # In-memory cache with TTL
+│   ├── db/           # Prisma client & services
+│   ├── webhooks/     # GitHub webhook handlers
+│   └── github.ts     # Octokit API client
+├── prisma/
+│   └── schema.prisma
+└── types/
 ```
 
 ---
 
-## 🚀 Deployment
+## Deployment
 
-### Vercel (Recommended)
+Deployed on Vercel. One-click deploy:
 
-1. Push to GitHub
-2. Import project in Vercel
-3. Add environment variables
-4. Deploy
-
-### Self-Hosted
-```bash
-npm run build
-npm run start
-```
-
-Requires PostgreSQL and environment variables configured.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/kapsarovL/github-dashboard-tracker)
 
 ---
 
-## 📝 Roadmap
+## License
 
-- [ ] Team analytics (cross-repository insights)
-- [ ] Slack/Discord webhook notifications
-- [ ] Custom metric definitions
-- [ ] Historical data retention (90+ days)
-- [ ] CSV/Excel export functionality
-- [ ] Multi-user workspace support
+MIT — see [LICENSE](./LICENSE)
 
 ---
 
-## 🤝 Contributing
-
-Contributions welcome! Please open an issue first to discuss proposed changes.
-
----
-
-## 📄 License
-
-MIT License - see LICENSE file for details
-
----
-
-**Status:** Active development | Production-ready | Open to contributions
-
-**Built by:** [Lazar Kapsarov](https://github.com/kapsarovL)  
-**Contact:** kapsarovlazar@gmail.com
+Built by [Lazar Kapsarov](https://lazarkapsarov.com)  
+→ contact@lazarkapsarov.com · [LinkedIn](https://linkedin.com/in/kapsarov-lazar)
